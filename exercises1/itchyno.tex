@@ -59,3 +59,30 @@
   \end{tabular}
   \caption*{Itchy no, iteration 2, eyes=blue branch. Best feature: soccer}
 \end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
+    Doris       & green & yes      & short  & female & no     & no  \\
+    Homer       & green & yes      & short  & male   & no     & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature      & Accuracies                              & Total\\
+    \midrule
+    eyes         & green: (1/2)                            & 1/2\\
+    handsome     & yes: (1/2)                              & 1/2\\
+    height       & short: (1/2)                            & 1/2\\
+    \textbf{sex} & male: (1/1), female: (1/1)              & \textbf{2/2}\\
+    soccer       & no: (1/2)                               & 7/9\\
+    \bottomrule
+  \end{tabular}
+  \caption*{Itchy no, iteration 3, eyes=green branch. Best feature: sex}
+\end{table}
