@@ -1,0 +1,89 @@
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ccccc|c}
+    \toprule
+    person      & handsome & height & sex    & soccer & date\\
+    \midrule
+    Apu         & yes      & tall   & male   & no     & yes \\
+    Bernice     & yes      & short  & female & no     & no  \\
+    Carl        & no       & tall   & male   & no     & yes \\
+    Doris       & yes      & short  & female & no     & no  \\
+    Edna        & no       & short  & female & yes    & no  \\
+    Prof. Frink & yes      & tall   & male   & yes    & no  \\
+    Gil         & no       & tall   & male   & yes    & no  \\
+    Homer       & yes      & short  & male   & no     & yes \\
+    Itchy       & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature      & Accuracies                              & Total\\
+    \midrule
+    handsome     & yes: (3/5), no: (2/4)                   & 5/9\\
+    height       & tall: (2/4), short: (3/5)               & 5/9\\
+    \textbf{sex} & male: (4/6), female: (3/3)              & \textbf{7/9}\\
+    soccer       & yes: (3/4), no: (3/5)                   & 6/9\\
+    \bottomrule
+  \end{tabular}
+  \caption*{No eyes, iteration 1, root branch. Best feature: sex}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ccccc|c}
+    \toprule
+    person      & handsome & height & sex    & soccer & date\\
+    \midrule
+    Apu         & yes      & tall   & male   & no     & yes \\
+    Carl        & no       & tall   & male   & no     & yes \\
+    Prof. Frink & yes      & tall   & male   & yes    & no  \\
+    Gil         & no       & tall   & male   & yes    & no  \\
+    Homer       & yes      & short  & male   & no     & yes \\
+    Itchy       & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature         & Accuracies                              & Total\\
+    \midrule
+    handsome        & yes: (2/3), no: (2/3)                   & 4/6\\
+    height          & tall: (2/4), short: (2/2)               & 4/6\\
+    sex             & male: (4/6)                             & 4/6\\
+    \textbf{soccer} & yes: (2/3), no: (3/3)                   & \textbf{5/6}\\
+    \bottomrule
+  \end{tabular}
+  \caption*{No eyes, iteration 2, sex/male branch. Best feature: soccer}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ccccc|c}
+    \toprule
+    person      & handsome & height & sex    & soccer & date\\
+    \midrule
+    Prof. Frink & yes      & tall   & male   & yes    & no  \\
+    Gil         & no       & tall   & male   & yes    & no  \\
+    Itchy       & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature         & Accuracies                              & Total\\
+    \midrule
+    handsome        & yes: (1/1), no: (1/2)                   & 2/3\\
+    \textbf{height} & tall: (2/2), short: (1/1)               & \textbf{3/3}\\
+    sex             & male: (2/3)                             & 2/3\\
+    soccer          & yes: (2/3)                              & 2/3\\
+    \bottomrule
+  \end{tabular}
+  \caption*{No eyes, iteration 3, soccer/yes branch. Best feature: height}
+\end{table}

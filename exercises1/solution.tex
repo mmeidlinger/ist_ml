@@ -1,0 +1,83 @@
+\documentclass{scrartcl}
+
+\input{setup}
+
+\title{Machine Learning}
+\subtitle{Exercise Sheet 1}
+
+\author{Georg Nebehay\\gnebehay@gmail.com}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Decision Trees}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
+    Apu         & blue  & yes      & tall   & male   & no     & yes \\
+    Bernice     & brown & yes      & short  & female & no     & no  \\
+    Carl        & blue  & no       & tall   & male   & no     & yes \\
+    Doris       & green & yes      & short  & female & no     & no  \\
+    Edna        & brown & no       & short  & female & yes    & no  \\
+    Prof. Frink & brown & yes      & tall   & male   & yes    & no  \\
+    Gil         & blue  & no       & tall   & male   & yes    & no  \\
+    Homer       & green & yes      & short  & male   & no     & yes \\
+    Itchy       & brown & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+  \caption{Training data.}
+\end{table}
+
+\subsection{Without attribute ``soccer''}
+At iteration 3, the algorithm enters an infinite recursion,
+    as in future steps the \textit{eyes} feature will always be selected
+    without completely separating the training set.
+    The dilemma here is in the eyes/blue branch that due to the omission of the soccer feature the two datapoints Carl and Gil share exactly the same feature values, but are labeled differently.
+    There are two options now, either we throw an error and refuse to grow this tree, or we simply stop the recursion here. The second option is probably preferable.
+\input{nosoccer}
+
+\subsection{Without attribute ``eyecolor''}
+
+\input{noeyes}
+
+\subsection{Itchy has label ``no''}
+
+\input{itchyno}
+
+\subsection{Additional training example ``Ralph''}
+
+\input{ralph}
+
+\subsection{sample tree}
+
+\begin{figure}
+\centering 
+\begin{tikzpicture}[level 1/.style={sibling distance=6em},
+level 2/.style={sibling distance=6em}]
+\node {} % root
+child { node {sex=yes} edge from parent node[left] {sex=yes}
+child { node {eyes=blue} }
+child { node {eyes=brown} }
+child { node {eyes=green} }
+}
+child { node {sex=no}
+};
+\end{tikzpicture}
+\end{figure}
+
+
+\section{Nearest Neighbour Classification}
+\section{Capacity \& Overfitting}
+\section{Missing Proofs}
+\section{Practical Experiments I}
+\section{Practical Experiments II}
+  
+\end{document}
+
