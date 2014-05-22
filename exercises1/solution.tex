@@ -27,15 +27,41 @@ level 3/.style={sibling distance=3em}%
 \section{Capacity \& Overfitting}
 \section{Missing Proofs}
 \section{Practical Experiments I}
+
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity,
+    ylabel=Error]
+    \addplot table[x expr=\coordindex,y index=0, header=false] {trainerror1.txt};%
+    \addplot table[x expr=\coordindex,y index=0, header=false] {testerror1.txt};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+  
+\end{tikzpicture}
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity,
+    ylabel=Error,
+	mark repeat = 10]
+	\addplot table[x expr=\coordindex,y index=0, header=false] {trainerror2.txt};%
+	\addplot table[x expr=\coordindex,y index=0, header=false] {testerror2.txt};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+  
+\end{tikzpicture}
+
 \section{Practical Experiments II}
 
-\begin{appendix}
+\clearpage
+
+\section{Appendix}
+
 \input{nosoccer}
 \input{noeyes}
 \input{itchyno}
 \input{ralph}
-  
-\end{appendix}
   
 \end{document}
 
