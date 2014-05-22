@@ -1,0 +1,6 @@
+Slide 5: First first
+
+Slide 8: minimize the number of wrong decision
+         until further test are made
+
+Slide 12: to directly seach
