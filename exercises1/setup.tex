@@ -16,6 +16,7 @@
 %\usepackage[utf8]{inputenc}
 %\usepackage{pgfplots}
 %\usepackage{pgfplotstable}
+\usepackage{morefloats}
 \usepackage{subcaption}
 %\usepackage{standalone}
 \usepackage{times}
@@ -37,6 +38,9 @@
 %
 %%tikz setup
 %\usetikzlibrary{arrows,calc,external,fit,shapes}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=ext/]
+\tikzexternaldisable
 %\usetikzlibrary{backgrounds}
 %\usetikzlibrary{pgfplots.groupplots}
 %

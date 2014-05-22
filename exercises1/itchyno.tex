@@ -20,13 +20,13 @@
 
   \begin{tabular}{ccc}
     \toprule
-    Feature      & Accuracies                              & Total\\
+    Feature      & Accuracies                                    & Total\\
     \midrule
-    \textbf{eyes} & blue: (2/3), brown: (4/4), green: (1/2) & \textbf{7/9}\\
-    handsome      & yes: (3/5), no: (3/4)                   & 6/9\\
-    height        & tall: (2/4), short: (4/5)               & 6/9\\
-    sex           & male: (3/6), female: (3/3)              & 6/9\\
-    soccer        & yes: (4/4), no: (3/5)                   & \textbf{7/9}\\
+    \textbf{eyes} & blue: (2/3), brown: (4/4) [no], green: (1/2) & \textbf{7/9}\\
+    handsome      & yes: (3/5), no: (3/4)                        & 6/9\\
+    height        & tall: (2/4), short: (4/5)                    & 6/9\\
+    sex           & male: (3/6), female: (3/3)                   & 6/9\\
+    soccer        & yes: (4/4), no: (3/5)                        & \textbf{7/9}\\
     \bottomrule
   \end{tabular}
   \caption*{Itchy no, iteration 1, root branch. Best feature: eyes}
@@ -54,7 +54,7 @@
     handsome        & yes: (1/1), no: (1/2)                   & 2/3\\
     height          & tall: (2/3)                             & 2/3\\
     sex             & male: (2/3)                             & 2/3\\
-    \textbf{soccer} & yes: (1/1), no: (2/2)                   & \textbf{3/3}\\
+    \textbf{soccer} & yes: (1/1) [no], no: (2/2) [yes]        & \textbf{3/3}\\
     \bottomrule
   \end{tabular}
   \caption*{Itchy no, iteration 2, eyes=blue branch. Best feature: soccer}
@@ -80,7 +80,7 @@
     eyes         & green: (1/2)                            & 1/2\\
     handsome     & yes: (1/2)                              & 1/2\\
     height       & short: (1/2)                            & 1/2\\
-    \textbf{sex} & male: (1/1), female: (1/1)              & \textbf{2/2}\\
+    \textbf{sex} & male: (1/1) [yes], female: (1/1) [no]   & \textbf{2/2}\\
     soccer       & no: (1/2)                               & 7/9\\
     \bottomrule
   \end{tabular}

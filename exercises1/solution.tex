@@ -10,8 +10,9 @@
 \date{}
 
 \tikzset{%
-level 1/.style={sibling distance=6em},%
-level 2/.style={sibling distance=6em}%
+level 1/.style={sibling distance=10em},%
+level 2/.style={sibling distance=7em},%
+level 3/.style={sibling distance=3em}%
 }
 
 \begin{document}
@@ -20,34 +21,35 @@ level 2/.style={sibling distance=6em}%
 
 \section{Decision Trees}
 
-\begin{table}[h!]
-  \centering
-  \begin{tabular}{cccccc|c}
-    \toprule
-    person      & eyes  & handsome & height & sex    & soccer & date\\
-    \midrule
-    Apu         & blue  & yes      & tall   & male   & no     & yes \\
-    Bernice     & brown & yes      & short  & female & no     & no  \\
-    Carl        & blue  & no       & tall   & male   & no     & yes \\
-    Doris       & green & yes      & short  & female & no     & no  \\
-    Edna        & brown & no       & short  & female & yes    & no  \\
-    Prof. Frink & brown & yes      & tall   & male   & yes    & no  \\
-    Gil         & blue  & no       & tall   & male   & yes    & no  \\
-    Homer       & green & yes      & short  & male   & no     & yes \\
-    Itchy       & brown & no       & short  & male   & yes    & yes \\
-    \bottomrule
-  \end{tabular}
-  \caption{Training data.}
-\end{table}
+We modified the algorithm presented in the slides slightly in a sense that
+a feature must not be selected in a node when it was already used in the previous node.
+
+
+%\begin{table}[h!]
+%  \centering
+%  \begin{tabular}{cccccc|c}
+%    \toprule
+%    person      & eyes  & handsome & height & sex    & soccer & date\\
+%    \midrule
+%    Apu         & blue  & yes      & tall   & male   & no     & yes \\
+%    Bernice     & brown & yes      & short  & female & no     & no  \\
+%    Carl        & blue  & no       & tall   & male   & no     & yes \\
+%    Doris       & green & yes      & short  & female & no     & no  \\
+%    Edna        & brown & no       & short  & female & yes    & no  \\
+%    Prof. Frink & brown & yes      & tall   & male   & yes    & no  \\
+%    Gil         & blue  & no       & tall   & male   & yes    & no  \\
+%    Homer       & green & yes      & short  & male   & no     & yes \\
+%    Itchy       & brown & no       & short  & male   & yes    & yes \\
+%    \bottomrule
+%  \end{tabular}
+%  \caption{Training data.}
+%\end{table}
 
 \subsection{Without attribute ``soccer''}
 
-At iteration 3, the algorithm enters an infinite recursion,
-as in future steps the \textit{eyes} feature will always be selected
-without completely separating the training set.
-The dilemma stems from the omission of the soccer feature,
-leading to the two datapoints Carl and Gil sharing exactly the same feature values.
-However, they are labelled opposingly.
+At iteration 4, the algorithm enters an infinite recursion.
+The problem stems from the omission of the soccer feature,
+leading to the two datapoints Carl and Gil sharing exactly the same feature values but opposite labels.
 We chose to stop the recursion at this point.
 The grown decision tree is shown in Figure~\ref{fig:tree-nosoccer}.
 
@@ -56,7 +58,10 @@ The grown decision tree is shown in Figure~\ref{fig:tree-nosoccer}.
 \begin{tikzpicture}
   \node {sex?}
   child { node {eyes?}
-    child { node {yes} edge from parent node[left] {blue} }
+    child { node {handsome?}
+      child { node {yes} edge from parent node[left] {yes} }
+      child { node {?} edge from parent node[right] {no} }
+      edge from parent node[left] {blue} }
     child { node {handsome?}
       child { node {no} edge from parent node[left] {yes} }
       child { node {yes} edge from parent node[right] {no} }
@@ -125,12 +130,22 @@ The decision tree is shown in Figure~\ref{fig:tree-ralph}.
 \begin{figure}
 \centering 
 \begin{tikzpicture}
-\node {soccer?}
-  child { node {no} edge from parent node[left] {yes} }
+\node {eyes?}
+  child { node {soccer?}
+    child { node {no} edge from parent node[left] {yes} }
+    child { node {yes} edge from parent node[right] {no} }
+    edge from parent node[left] {blue} }
+  child { node {handsome}
+    child { node {sex?}
+      child { node {yes} edge from parent node[left] {male} }
+      child { node {no} edge from parent node[right] {female} }
+      edge from parent node[right] {no} }
+    child { node {no} edge from parent node[left] {yes} }
+    edge from parent node[fill=white] {brown} }
   child { node {sex?}
     child { node {yes} edge from parent node[left] {male} }
     child { node {no} edge from parent node[right] {female} }
-  edge from parent node[right] {no} }
+    edge from parent node[right] {green} }
 ;
 \end{tikzpicture}
 \caption{Decision tree for task d)}

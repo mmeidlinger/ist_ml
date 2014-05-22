@@ -23,14 +23,14 @@
     \toprule
     Feature         & Accuracies                              & Total\\
     \midrule
-    eyes            & blue: (2/3), brown: (3/4), green: (2/3) & 7/10\\
+    \textbf{eyes}   & blue: (2/3), brown: (3/4), green: (2/3) & \textbf{7/10}\\
     handsome        & yes: (3/5), no: (3/5)                   & 6/10\\
     height          & tall: (2/4), short: (4/6)               & 6/10\\
-    sex             & male: (4/7), female: (3/3)              & 7/10\\
-    \textbf{soccer} & yes: (5/5), no: (3/5)                   & \textbf{8/10}\\
+    sex             & male: (4/7), female: (3/3)              & \textbf{7/10}\\
+    soccer          & yes: (4/5), no: (3/5)                   & \textbf{7/10}\\
     \bottomrule
   \end{tabular}
-  \caption*{Ralph, iteration 1, root branch. Best feature: soccer}
+  \caption*{Ralph, iteration 1, root branch. Best feature: eyes}
 \end{table}
 
 \begin{table}[h!]
@@ -40,8 +40,117 @@
     person      & eyes  & handsome & height & sex    & soccer & date\\
     \midrule
     Apu         & blue  & yes      & tall   & male   & no     & yes \\
-    Bernice     & brown & yes      & short  & female & no     & no  \\
     Carl        & blue  & no       & tall   & male   & no     & yes \\
+    Gil         & blue  & no       & tall   & male   & yes    & no  \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature         & Accuracies                              & Total\\
+    \midrule
+    eyes            & blue: (2/3)                             & 2/3\\
+    handsome        & yes: (1/1), no: (1/2)                   & 2/3\\
+    height          & tall: (2/3)                             & 2/3\\
+    sex             & male: (2/3)                             & 2/3\\
+    \textbf{soccer} & yes: (1/1) [no], no: (2/2) [yes]        & \textbf{3/3}\\
+    \bottomrule
+  \end{tabular}
+  \caption*{Ralph, iteration 2, eyes=blue branch. Best feature: soccer}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
+    Bernice     & brown & yes      & short  & female & no     & no  \\
+    Edna        & brown & no       & short  & female & yes    & no  \\
+    Prof. Frink & brown & yes      & tall   & male   & yes    & no  \\
+    Itchy       & brown & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature           & Accuracies                              & Total\\
+    \midrule
+    eyes              & brown: (3/4)                            & \textbf{3/4}\\
+    \textbf{handsome} & yes: (2/2) [no], no: (1/2)              & \textbf{3/4}\\
+    height            & tall: (1/1), short: (2/3)               & \textbf{3/4}\\
+    sex               & male: (1/2), female: (2/2)              & \textbf{3/4}\\
+    soccer            & yes: (2/3), no: (1/1)                   & \textbf{3/4}\\
+    \bottomrule
+  \end{tabular}
+  \caption*{Ralph, iteration 3, eyes=brown branch. Best feature: handsome}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
+    Edna        & brown & no       & short  & female & yes    & no  \\
+    Itchy       & brown & no       & short  & male   & yes    & yes \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature           & Accuracies                            & Total\\
+    \midrule
+    eyes              & brown: (1/2)                          & 1/2\\
+    handsome          & no: (1/2)                             & 1/2\\
+    height            & short: (1/2)                          & 1/2\\
+    \textbf{sex}      & male: (1/1) [yes], female: (1/1) [no] & 2/2\\
+    soccer            & yes: (1/2)                            & 1/2\\
+    \bottomrule
+  \end{tabular}
+  \caption*{Ralph, iteration 4, eyes=brown,handsome=no branch. Best feature: sex}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
+    Doris       & green & yes      & short  & female & no     & no  \\
+    Homer       & green & yes      & short  & male   & no     & yes \\
+    Ralph       & green & no       & short  & male   & yes    & no  \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature           & Accuracies                              & Total\\
+    \midrule
+    eyes              & green: (2/3)                            & \textbf{2/3}\\
+    \textbf{handsome} & yes: (1/2), no: (1/1)                   & \textbf{2/3}\\
+    height            & short: (2/3)                            & \textbf{2/3}\\
+    sex               & male: (1/2), female: (1/2)              & \textbf{2/3}\\
+    soccer            & yes: (1/1), no: (1/2)                   & \textbf{2/3}\\
+    \bottomrule
+  \end{tabular}
+  \caption*{Ralph, iteration 5, eyes=green branch. Best feature: handsome}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{cccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & soccer & date\\
+    \midrule
     Doris       & green & yes      & short  & female & no     & no  \\
     Homer       & green & yes      & short  & male   & no     & yes \\
     \bottomrule
@@ -51,15 +160,14 @@
 
   \begin{tabular}{ccc}
     \toprule
-    Feature      & Accuracies                              & Total\\
+    Feature           & Accuracies                              & Total\\
     \midrule
-    eyes         & blue: (2/2), brown: (1/1), green: (1/2) & 4/5\\
-    handsome     & yes: (2/4), no: (1/1)                   & 3/5\\
-    height       & tall: (2/2), short: (2/3)               & 4/5\\
-    \textbf{sex} & male: (3/3), female: (2/2)              & \textbf{5/5}\\
-    soccer       & no: (3/5)                               & 8/10\\
+    eyes              & green: (1/2)                            & 1/2\\
+    handsome          & yes: (1/2)                              & 1/2\\
+    height            & short: (1/2)                            & 1/2\\
+    \textbf{sex}      & male: (1/1) [yes], female: (1/1) [no]   & \textbf{2/2}\\
+    soccer            & no: (1/1)                               & 1/2\\
     \bottomrule
   \end{tabular}
-  \caption*{Ralph, iteration 2, soccer=no branch. Best feature: sex}
+  \caption*{Ralph, iteration 5, eyes=green branch. Best feature: sex}
 \end{table}
-

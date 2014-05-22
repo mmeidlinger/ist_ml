@@ -25,7 +25,7 @@
     eyes         & blue: (2/3), brown: (3/4), green: (1/2) & 6/9\\
     handsome     & yes: (3/5), no: (2/4)                   & 5/9\\
     height       & tall: (2/4), short: (3/5)               & 5/9\\
-    \textbf{sex} & male: (4/6), female: (3/3)              & \textbf{7/9}\\
+    \textbf{sex} & male: (4/6), female: (3/3) [no]         & \textbf{7/9}\\
     \bottomrule
   \end{tabular}
   \caption*{No soccer, iteration 1, root branch. Best feature: sex}
@@ -50,12 +50,12 @@
 
   \begin{tabular}{ccc}
     \toprule
-    Feature       & Accuracies                              & Total\\
+    Feature       & Accuracies                                    & Total\\
     \midrule
-    \textbf{eyes} & blue: (2/3), brown: (1/2), green: (1/1) & 4/6\\
-    handsome      & yes: (2/3), no: (2/3)                   & 4/6\\
-    height        & tall: (2/4), short: (2/2)               & 4/6\\
-    sex           & male: (4/6)                             & 4/6\\
+    \textbf{eyes} & blue: (2/3), brown: (1/2), green: (1/1) [yes] & 4/6\\
+    handsome      & yes: (2/3), no: (2/3)                         & 4/6\\
+    height        & tall: (2/4), short: (2/2)                     & 4/6\\
+    sex           & male: (4/6)                                   & 4/6\\
     \bottomrule
   \end{tabular}
   \caption*{No soccer, iteration 2, sex=male branch. Best feature: eyes}
@@ -77,15 +77,42 @@
 
   \begin{tabular}{ccc}
     \toprule
-    Feature       & Accuracies            & Total\\
+    Feature           & Accuracies                  & Total\\
     \midrule
-    \textbf{eyes} & blue: (2/3)           & \textbf{2/3}\\
-    handsome      & yes: (1/1), no: (1/2) & \textbf{2/3}\\
-    height        & tall: (2/3)           & \textbf{2/3}\\
-    sex           & male: (2/3)           & \textbf{2/3}\\
+    eyes              & blue: (2/3)                 & \textbf{2/3}\\
+    \textbf{handsome} & yes: (1/1) [yes], no: (1/2) & \textbf{2/3}\\
+    height            & tall: (2/3)                 & \textbf{2/3}\\
+    sex               & male: (2/3)                 & \textbf{2/3}\\
     \bottomrule
   \end{tabular}
-  \caption*{No soccer, iteration 3, sex=male,eyes/blue branch. Best feature: eyes}
+  \caption*{No soccer, iteration 3, sex=male,eyes/blue branch. Best feature: handsome}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ccccc|c}
+    \toprule
+    person      & eyes  & handsome & height & sex    & date\\
+    \midrule
+    Carl        & blue  & no       & tall   & male   & yes \\
+    Gil         & blue  & no       & tall   & male   & no  \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{.5cm}
+
+  \begin{tabular}{ccc}
+    \toprule
+    Feature           & Accuracies                  & Total\\
+    \midrule
+    eyes              & blue: (1/2)                 & 1/2\\
+    handsome          & no: (1/2)                   & 1/2\\
+    height            & tall: (1/2)                 & 1/2\\
+    sex               & male: (1/2)                 & 1/2\\
+    \bottomrule
+  \end{tabular}
+  \caption*{No soccer, iteration 4, sex=male,eyes/blue,handsome=no branch.
+  Stopping because of infinite recursion that lies ahead.}
 \end{table}
 
 \begin{table}[h!]
@@ -106,11 +133,11 @@
     Feature           & Accuracies                              & Total\\
     \midrule
     eyes              & brown: (1/2)                            & 1/2\\
-    \textbf{handsome} & yes: (1/1), no: (1/1)                   & \textbf{2/2}\\
+    \textbf{handsome} & yes: (1/1) [no], no: (1/1) [yes]        & \textbf{2/2}\\
     height            & tall: (1/1), short: (1/1)               & \textbf{2/2}\\
     sex               & male: (1/2)                             & 1/2\\
     \bottomrule
   \end{tabular}
-  \caption*{No soccer, iteration 4, sex=male,eyes=brown branch. Best feature: handsome}
+  \caption*{No soccer, iteration 5, sex=male,eyes=brown branch. Best feature: handsome}
 \end{table}
 
