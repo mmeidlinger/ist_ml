@@ -1,3 +1,7 @@
 !*.pdf
 solution.pdf
 ext
+*.aux
+*.auxlock
+*.log
+*.synctex.gz
