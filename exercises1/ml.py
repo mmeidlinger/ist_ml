@@ -167,10 +167,15 @@ class AdaBoost:
 class WeakLearner:
 
 	column = None
-	value = None
+	threshold = None
+	only_greater = False
 
 	def classify(self, X):
-		labels = 2*(X[:,self.column] == self.value) - 1
+		if self.only_greater:
+			labels = X[:,self.column] > self.value
+		else:
+			labels = X[:,self.column] <= self.value
+		labels = 2 * labels - 1
 		return labels
 
 class AdaBoost:
@@ -186,11 +191,20 @@ class AdaBoost:
 		#Create weak learners
 		H = []
 		for c in xrange(m):
-			for v in np.unique(X[:,c]):
-				h = WeakLearner()
-				h.column = c
-				h.value = v
-				H.append(h)
+			v = np.mean(X[:,c])
+
+			h1 = WeakLearner()
+			h1.column = c
+			h1.value = v
+			h1.only_greater = True
+
+			h2 = WeakLearner()
+			h2.column = c
+			h2.value = v
+			h2.only_greater = False
+
+			H.append(h1)
+			H.append(h2)
 
 		#Make sure we don't run out of weak classifiers
 		T = min(T,len(H))
@@ -270,5 +284,5 @@ class AdaBoost:
 		labels = np.sign(response)
 		labels[labels==0] = -1
 
-		return labels
+		return labels, response
 
