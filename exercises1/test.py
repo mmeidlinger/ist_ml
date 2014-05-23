@@ -1,8 +1,9 @@
 import numpy as np
-import perceptron
+import ml
 
 if __name__ == '__main__':
-	p = perceptron.Perceptron()
+
+	#Read training/testing data
 	D = np.genfromtxt('training1.txt')
 	T = np.genfromtxt('testing.txt')
 
@@ -12,17 +13,31 @@ if __name__ == '__main__':
 	T_Y = T[:,-1]
 	T = T[:,:-1]
 
-	train_err, test_err = p.train(X,Y,T,T_Y)
-	np.savetxt('trainerror1.txt', train_err, fmt='%d')
-	np.savetxt('testerror1.txt', test_err, fmt='%d')
+	p = ml.Perceptron()
+	ab = ml.AdaBoost()
 
-	p = perceptron.Perceptron()
+	train_err, test_err = p.train(X,Y,T,T_Y)
+	np.savetxt('trainerror1-perc.txt', train_err, fmt='%d')
+	np.savetxt('testerror1-perc.txt', test_err, fmt='%d')
+
+	train_err, test_err = ab.train(X,Y,10,T,T_Y)
+	np.savetxt('trainerror1-boost.txt', train_err, fmt='%d')
+	np.savetxt('testerror1-boost.txt', test_err, fmt='%d')
+
+	#Reset classifiers
+	p = ml.Perceptron()
+	ab = ml.AdaBoost()
+
 	D = np.genfromtxt('training2.txt')
 
-	#Split into data and labels
+	##Split into data and labels
 	Y = D[:,-1]
 	X = D[:,:-1]
 
 	train_err, test_err = p.train(X,Y,T,T_Y)
-	np.savetxt('trainerror2.txt', train_err, fmt='%d')
-	np.savetxt('testerror2.txt', test_err, fmt='%d')
+	np.savetxt('trainerror2-perc.txt', train_err, fmt='%d')
+	np.savetxt('testerror2-perc.txt', test_err, fmt='%d')
+
+	train_err, test_err = ab.train(X,Y,10,T,T_Y)
+	np.savetxt('trainerror2-boost.txt', train_err, fmt='%d')
+	np.savetxt('testerror2-boost.txt', test_err, fmt='%d')

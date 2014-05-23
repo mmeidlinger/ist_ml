@@ -28,12 +28,14 @@ level 3/.style={sibling distance=3em}%
 \section{Missing Proofs}
 \section{Practical Experiments I}
 
+\subsection{Perceptron}
+
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
     ylabel=Error]
-    \addplot table[x expr=\coordindex,y index=0, header=false] {trainerror1.txt};%
-    \addplot table[x expr=\coordindex,y index=0, header=false] {testerror1.txt};%
+    \addplot table[x expr=\coordindex,y index=0, header=false] {trainerror1-perc.txt};%
+    \addplot table[x expr=\coordindex,y index=0, header=false] {testerror1-perc.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -44,8 +46,33 @@ level 3/.style={sibling distance=3em}%
     xlabel=Complexity,
     ylabel=Error,
 	mark repeat = 10]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {trainerror2.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {testerror2.txt};%
+	\addplot table[x expr=\coordindex,y index=0, header=false] {trainerror2-perc.txt};%
+	\addplot table[x expr=\coordindex,y index=0, header=false] {testerror2-perc.txt};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+  
+\end{tikzpicture}
+
+\subsection{AdaBoost}
+
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity,
+    ylabel=Error]
+    \addplot table[x expr=\coordindex,y index=0, header=false] {trainerror1-boost.txt};%
+    \addplot table[x expr=\coordindex,y index=0, header=false] {testerror1-boost.txt};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+  
+\end{tikzpicture}
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity,
+    ylabel=Error]
+	\addplot table[x expr=\coordindex,y index=0, header=false] {trainerror2-boost.txt};%
+	\addplot table[x expr=\coordindex,y index=0, header=false] {testerror2-boost.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
