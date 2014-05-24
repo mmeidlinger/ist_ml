@@ -1,6 +1,7 @@
 \documentclass{scrartcl}
 
 \input{setup}
+\input{mathsetup}
 
 \title{Machine Learning SS 2014}
 \subtitle{Exercise Sheet 1}
@@ -23,9 +24,53 @@ level 3/.style={sibling distance=3em}%
 
 \input{trees}
 
+\subsection{Additional Attributes}
+There are $K=5$ attributes given, none of which a single split along any of those would achieve zero error probability. In order to achieve zero error probability with a single split along any of the $D$ additional attributes, at least one set of values of those additional attributes must be isomorphic to the dating decision. Let $\vec d \in \lbrace 0,1\rbrace^n$ denote the dating decisions of the $n$ candidates and $\rvec a_i \sim \frac{1}{2^n}$, $i=1,\dots,D$  random vectors representing the additional attributes. We can then derive the probability of zero error with a single split (event $\mathcal A$) as follows:
+
+\begin{align}
+	\Prob{\mathcal A}& = 
+	\Prob{ \Big(\rvec a_1 = \vec d \vee \rvec a_1 = \neg \vec d \Big) \vee 
+		\dots \vee \Big(\rvec a_D = \vec d \vee \rvec a_D = \neg \vec d \Big)} \\
+	&= \sum_{i=1}^{D}  \left( \frac{2}{2^n} \right)^i  \left( 1-\frac{2}{2^n}\right)^{D-i} 
+	= 1- \left( 1-2^{n-1} \right)^{D} 
+	= \begin{cases} 0.0384 &D=10 \\  0.3293 &D=100 \\ 0.950 &D=1353\end{cases}
+\end{align}
+
 \section{Nearest Neighbour Classification}
 \section{Capacity \& Overfitting}
 \section{Missing Proofs}
+\subsection{Bayes Classifier}
+The optimal classifier is given by
+\begin{equation}
+	c^\star(x) = \argmax_{y \in \mathcal Y} p(y| x) = \argmax_{y \in \mathcal Y} p(x,y),
+\end{equation}
+which for the binary case $y\in\lbrace -1,1\rbrace$ simplifies to
+\begin{equation}
+	c^\star(x) = \begin{cases} +1 &  p(+1|x) > p(-1|x) \\ -1 &\text{otherwise}\end{cases} 
+	=  \sign \left( \log  \frac{p(+1|x)}{p(-1|x)}\right)
+	=  \sign \left( \log  \frac{p(x,+1)}{p(x,-1)}\right),
+\end{equation}
+since $p(x,y)=p(y|x)p(x)$. \hfill $\blacksquare$
+
+In communications, the quantities $\log  \frac{p(+1|x)}{p(-1|x)}$ are referred to as \emph{Log-Likelihood-Ratios (LLRs)} and are used in iterative decoding algorithms to quantify wether a bit was $+1$ or $-1$, given the received signal $x$.
+
+\subsection{Minimum Risk Classifier}
+The optimal classifier is given by
+\begin{equation}
+	c_\ell^\star(x) = \argmin_{y \in \mathcal Y}\E[\overline y \sim p(\overline y | x)][]{\ell(\overline y, y)}
+					=  \argmin_{y \in \mathcal Y} \sum_{\overline y \in \mathcal Y} p(\overline y | x) \ell(\overline y, y) ,
+\end{equation}
+which for the binary case $y\in\lbrace -1,1\rbrace$ simplifies to
+\begin{equation}
+	c_\ell^\star(x) = \begin{cases} +1 &  p(+1|x)\overbrace{\ell(+1,+1)}^{d} + p(-1|x)\overbrace{\ell(-1,+1)}^{b} <
+															p(+1|x)\overbrace{\ell(+1,-1)}^{c} + p(-1|x)\overbrace{\ell(-1,-1)}^{a} \\ 
+													-1 &\text{otherwise}\end{cases} 
+\end{equation}
+and hence
+\begin{equation}
+	c_\ell^\star(x) =  \sign \left( \log  \frac{p(+1|x)(c-d)}{p(-1|x)(b-a)}\right) 
+							= \sign \left( \log  \frac{p(+1|x)}{p(-1|x)} + \log{\frac{c-d}{b-a}}\right). \hfill \blacksquare
+\end{equation}
 \section{Practical Experiments I}
 
 \subsection{Perceptron}

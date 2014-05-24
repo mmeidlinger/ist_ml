@@ -1,0 +1,82 @@
+
+% Probability of event
+% 1st optional parameter: footnote (probability w.r.t. specific random variable / condition)
+% 2nd optional parameter: determine the size of the brackes (big, Big, bigg, Bigg, normal), standard: \left, \right
+\DeclareDocumentCommand{\Prob}{ O{\empty} O{\empty} m}{
+  \ensuremath{
+    \mathrm{P}
+    \ifthenelse{\equal{#1}{\empty}}{}{_{#1}}
+    \ifthenelse{\equal{#2}{big}}{\big\{{#3}\big\}}{
+      \ifthenelse{\equal{#2}{Big}}{\Big\{{#3}\Big\}}{
+        \ifthenelse{\equal{#2}{bigg}}{\bigg\{{#3}\bigg\}}{
+          \ifthenelse{\equal{#2}{Bigg}}{\Bigg\{{#3}\Bigg\}}{
+            \ifthenelse{\equal{#2}{normal}}{\{{#3}\}}{\left\{{#3}\right\}}
+          }
+        }
+      }
+    }
+  }
+}
+
+% Expectation
+% 1st optional parameter: footnote (expectation w.r.t. specific random variable / condition)
+% 2nd optional parameter: determine the size of the brackes (big, Big, bigg, Bigg, normal), standard: \left, \right
+\DeclareDocumentCommand{\E}{ O{\empty} O{\empty} m}{
+  \ensuremath{
+%    \raisebox{-1.5pt}{\ensuremath{\mathlarger{\mathlarger{\mathbbmss{E}}}}}
+    \ensuremath{\mathlarger{\mathbbmss{E}}}
+    \ifthenelse{\equal{#1}{\empty}}{}{_{#1}}
+    \ifthenelse{\equal{#2}{big}}{\big[{#3}\big]}{
+      \ifthenelse{\equal{#2}{Big}}{\Big[{#3}\Big]}{
+        \ifthenelse{\equal{#2}{bigg}}{\bigg[{#3}\bigg]}{
+          \ifthenelse{\equal{#2}{Bigg}}{\Bigg[{#3}\Bigg]}{
+            \ifthenelse{\equal{#2}{normal}}{[{#3}]}{\left[{#3}\right]}
+          }
+        }
+      }
+    }
+  }
+}
+
+% Inner product
+%  optional parameter: determine the size of the brackes (big, Big, bigg, Bigg, normal), standard: \left, \right
+\DeclareDocumentCommand{\inprod}{  O{\empty} m m}{
+  \ensuremath{
+    \ifthenelse{\equal{#1}{big}}{\big\langle{#2},{#3}\big\rangle}{
+      \ifthenelse{\equal{#1}{Big}}{\Big\langle{#2},{#3}\Big\rangle}{
+        \ifthenelse{\equal{#1}{bigg}}{\bigg\langle{#2},{#3}\bigg\rangle}{
+          \ifthenelse{\equal{#1}{Bigg}}{\Bigg\langle{#2},{#3}\Bigg\rangle}{
+            \ifthenelse{\equal{#1}{normal}}{\langle{#2},{#3}\rangle}{\left\langle{#2},{#3}\right\rangle}
+          }
+        }
+      }
+    }
+  }
+}
+
+% Norm
+%  optional parameter: determine the size of the brackes (big, Big, bigg, Bigg, normal), standard: \left, \right
+\DeclareDocumentCommand{\norm}{  O{\empty} m}{
+  \ensuremath{
+    \ifthenelse{\equal{#1}{big}}{\big\Vert{#2}\big\Vert}{
+      \ifthenelse{\equal{#1}{Big}}{\Big\Vert{#2}\Big\Vert}{
+        \ifthenelse{\equal{#1}{bigg}}{\bigg\Vert{#2}\bigg\Vert}{
+          \ifthenelse{\equal{#1}{Bigg}}{\Bigg\Vert{#2}\Bigg\Vert}{
+            \ifthenelse{\equal{#1}{normal}}{\Vert{#2}\Vert}{\left\Vert{#2}\right\Vert}
+          }
+        }
+      }
+    }
+  }
+}
+
+\newcommand{\sign}{\mathrm{sign}}
+
+\newcommand{\rv}[1]{\mathsf{#1}}  				 %Random Variable. Write them in lower case letters.
+\renewcommand{\vec}[1]{\mathbf{#1}}	 %deterministic vector
+\newcommand{\rvec}[1]{{\textbf{\textsf{#1}}}}%random vector
+\newcommand{\mat}[1]{\uppercase{\mathbf{#1}}}   %deterministic matrix. Use lower case letters, the command makes them uppercase
+\newcommand{\rmat}[1]{\uppercase{\textbf{\textsf{#1}}}}   %random matrix. Use lower case letters, the command makes them uppercase
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
