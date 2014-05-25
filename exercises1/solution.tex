@@ -6,7 +6,11 @@
 \title{Machine Learning SS 2014}
 \subtitle{Exercise Sheet 1}
 
-\author{Georg Nebehay\\gnebehay@gmail.com}
+\author{Georg Nebehay\\gnebehay@gmail.com
+\and
+Michael Meidlinger\\
+michael.meidlinger@nt.tuwien.ac.at
+}
 
 \date{}
 
@@ -78,7 +82,8 @@ and hence
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
-    ylabel=Error]
+    ylabel=Error,
+  title=normal run]
     \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-perc.txt};%
     \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-perc.txt};%
     \addlegendentry{training}%
@@ -90,7 +95,8 @@ and hence
   \begin{axis}[
     xlabel=Complexity,
     ylabel=Error,
-	mark repeat = 10]
+	mark repeat = 10,
+  title=switched label of $y^9$]
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-perc.txt};%
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-perc.txt};%
     \addlegendentry{training}%
@@ -104,7 +110,8 @@ and hence
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
-    ylabel=Error]
+    ylabel=Error,
+  title=normal run]
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-boost.txt};%
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-boost.txt};%
     \addlegendentry{training}%
@@ -115,7 +122,8 @@ and hence
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
-    ylabel=Error]
+    ylabel=Error,
+  title=switched label of $y^9$]
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-boost.txt};%
 	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-boost.txt};%
     \addlegendentry{training}%
@@ -125,11 +133,27 @@ and hence
 \end{tikzpicture}
 
 \section{Practical Experiments II}
+\subsection{AdaBoost}
+In order to perform multiclass classification on the wine dataset using AdaBoost,
+we employed a one-versus-all strategy.
+We trained one classifier for each class,
+using examples from one class as positive examples and
+examples from all other classes as negative examples.
+We combined the classifiers by predicting the label $y$ for which the corresponding classifier
+reports the highest confidence score
+%
+\begin{equation}
+  \hat y = \argmax_{k \in 1 \ldots K} f_k(x)  
+\end{equation}
+%
+Using this method we achieve a test error of $E=8$ on the wine dataset.
+
+
 \subsection{Decision Tree}
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity (\# of nodes),
-    ylabel=Error ]
+    ylabel=Error]
 	\addplot table[ header=false] {tree_continous/6a_train.txt};%
 	\addplot table[header=false] {tree_continous/6a_test.txt};%};%
     \addlegendentry{training}%
