@@ -62,8 +62,8 @@ The optimal classifier is given by
 \end{equation}
 which for the binary case $y\in\lbrace -1,1\rbrace$ simplifies to
 \begin{equation}
-	c_\ell^\star(x) = \begin{cases} +1 &  p(+1|x)\overbrace{\ell(+1,+1)}^{d} + p(-1|x)\overbrace{\ell(-1,+1)}^{b} <
-															p(+1|x)\overbrace{\ell(+1,-1)}^{c} + p(-1|x)\overbrace{\ell(-1,-1)}^{a} \\ 
+	c_\ell^\star(x) = \begin{cases} +1 &  p(+1|x)\underbrace{\ell(+1,+1)}_{d} + p(-1|x)\underbrace{\ell(-1,+1)}_{b} <
+															p(+1|x)\underbrace{\ell(+1,-1)}_{c} + p(-1|x)\underbrace{\ell(-1,-1)}_{a} \\ 
 													-1 &\text{otherwise}\end{cases} 
 \end{equation}
 and hence
@@ -125,7 +125,17 @@ and hence
 \end{tikzpicture}
 
 \section{Practical Experiments II}
-
+\subsection{Decision Tree}
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity (\# of nodes),
+    ylabel=Error ]
+	\addplot table[ header=false] {tree_continous/6a_train.txt};%
+	\addplot table[header=false] {tree_continous/6a_test.txt};%};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+\end{tikzpicture}
 \clearpage
 
 \section{Appendix}

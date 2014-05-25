@@ -19,31 +19,37 @@ end
 [vv_max,pp_max] = ind2sub(size(accuracies_left),ind);
 %% Perform (binary) split: left = \beg than threshold, right= < than threshold
 theta= root.data(vv_max,pp_max);
-
 split_data_left = root.data(root.data(:,pp_max)>=theta,:);
-% split_data_left(:,pp_max)=[];
 split_data_right = root.data(root.data(:,pp_max)< theta,:);
-% split_data_right(:,pp_max)=[];
-    
-left_child = node(split_data_left); 
-left_child.parent=root;
-left_child.Nmiss = size(root.data,1)-accuracies_left(vv_max,pp_max);
-if left_child.Nmiss ==0 || isempty(split_data_left)
-    left_child.y = maj_vote_left(vv_max,pp_max);
+
+if ~isempty(split_data_left)
+    left_child = node(split_data_left); 
+    left_child.parent=root;
+    left_child.Nmiss = size(split_data_left,1)-accuracies_left(vv_max,pp_max);
+    if left_child.Nmiss ==0 
+        left_child.y = maj_vote_left(vv_max,pp_max);
+    else
+        left_child.active=true;
+    end
 else
-    left_child.active=true;
+    left_child = [];
 end
 
-right_child = node(split_data_right); 
-right_child.parent=root;
-right_child.Nmiss = size(root.data,1)-accuracies_right(vv_max,pp_max);
-if right_child.Nmiss ==0 || isempty(split_data_right)
-    right_child.y = maj_vote_right(vv_max,pp_max);
+if ~isempty(split_data_right)
+    right_child = node(split_data_right); 
+    right_child.parent=root;
+    right_child.Nmiss = size(split_data_right,1)-accuracies_right(vv_max,pp_max);
+    if right_child.Nmiss ==0 
+        right_child.y = maj_vote_right(vv_max,pp_max);
+    else
+        right_child.active=true;
+    end
 else
-    right_child.active=true;
+    right_child = [];
 end
 
-root.children= [left_child right_child ];
+root.left= left_child;
+root.right= right_child;
 root.property_index = pp_max;
 root.checkvalue=theta;
 root.data=[];

@@ -1,13 +1,19 @@
 function  y  = classify_sample( root, sample )
 
-    if ~isempty(root.children)
-            if sample(root.property_index)>= root.checkvalue
-                y  = classify_sample( root.children(1), sample ); 
-            else
-                y  = classify_sample( root.children(2), sample );
-            end
+
+if sample(root.property_index)>= root.checkvalue
+    if ~isempty(root.left)
+        y  = classify_sample( root.left, sample ); 
     else
         y=root.y;
     end
+else
+    if ~isempty(root.right)
+        y  = classify_sample( root.right, sample );
+    else
+        y=root.y;
+    end
+end
+
 end
 

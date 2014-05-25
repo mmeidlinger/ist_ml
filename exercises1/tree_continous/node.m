@@ -4,7 +4,8 @@ classdef node < handle
     
     properties
     parent   %parent node
-    children %vector of child nodes
+    left
+    right%vector of child nodes
     checkvalue %property value of the split
     property_index %which property are we checking
     active = false; %wether the node is active
@@ -16,10 +17,12 @@ classdef node < handle
     methods
         function obj = node(Data)
             obj.parent=0;
-            obj.children = [];
+            obj.left = [];
+            obj.right = [];
             obj.checkvalue =[];
             obj.active= false;
             obj.data=Data;
+            obj.y = inf;
         end
     end
     
