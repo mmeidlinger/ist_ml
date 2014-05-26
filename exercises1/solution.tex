@@ -3,6 +3,8 @@
 \input{setup}
 \input{mathsetup}
 
+\usepackage{enumitem}
+
 \title{Machine Learning SS 2014}
 \subtitle{Exercise Sheet 1}
 
@@ -42,7 +44,46 @@ There are $K=5$ attributes given, none of which a single split along any of thos
 
 \section{Nearest Neighbour Classification}
 
-\mytodo{2a}
+In this section we assume that the data is consistent,
+meaning that for each pair of examples $(x_1,y_1), (x_2,y_2)$ the statement
+$x_1 = x_2 \rightarrow y_1 = y_2$ is true.
+
+\subsection{a)}
+
+\mytodo{}
+
+\subsection{b)}
+
+Advantages of k-NN with $k > 1$ over NN are the following:
+\begin{itemize}
+  \item Robustness to outliers
+  \item Model complexity can be steered
+\end{itemize}
+
+Disadvantages are:
+\begin{itemize}
+  \item Danger of underfitting
+  \item Additional parameter that needs to be tuned
+  \item More difficult to implement
+\end{itemize}
+
+\subsection{c)}
+The training error of NN is always zero, as NN has capacity $\infty$ and completely memorizes the training set.
+For any $x \in D$, the distance to itself is $\lVert x - x\rVert = 0$, meaning that all training examples will be
+classified correctly.
+For K-NN, this is no longer true, as for instance in a 3-NN classifier the next two neighbors might have a different label, thus misclassifying the training example.
+
+\subsection{(d)}
+Suppose we have calculated all the $d_i = \lVert x - x_i \rVert$ for some new sample $x$
+and ordered the distances in increasing order.
+For 2K-NN, we have a majority vote on the first 2k elements of this list.
+There are 2 possibilites: Either there is one label that occurs more often than all the others.
+Then the predicted label is identical to the output of a (2K-1)-NN classifier,
+as there is always a margin of at least 2 since we have 2K elements in our list.
+The other possibility is that there are two labels with the same number of occurrences.
+In this case, the 2K-NN classifier predicts the majority label of the first (2K-1) elements.
+As the first 2K-1 elements are now guaranteed to have a majority, this output is identical to a (2K-1)-NN
+classifier. 
 
 \section{Capacity \& Overfitting}
 \subsection{Capacity}
@@ -140,8 +181,6 @@ are no longer linearly separable.
 \end{tikzpicture}
 
 \subsection{AdaBoost}
-
-\mytodo{This is weird.}
 
 \begin{tikzpicture}
   \begin{axis}[
