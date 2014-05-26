@@ -1,4 +1,4 @@
-function [ root ] = train_tree( D )
+function [ root ] = train_tree( D)
 
 root = node(D);
 root.active=true;
@@ -12,3 +12,5 @@ while 1
     split_node(active);
     end
 end
+
+
