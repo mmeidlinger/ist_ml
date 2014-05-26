@@ -58,7 +58,6 @@ if __name__ == '__main__':
 
 		#Train AdaBoost
 		b = ml.AdaBoost()
-		import ipdb; ipdb.set_trace()
 		b.train(X_1, new_labels, 100, X_2, Y_2)
 
 		replacements.append(c)
