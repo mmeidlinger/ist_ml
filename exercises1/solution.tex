@@ -40,8 +40,36 @@ There are $K=5$ attributes given, none of which a single split along any of thos
 	= \begin{cases} 0.0384 &D=10 \\  0.3293 &D=100 \\ 0.950 &D=1353\end{cases}
 \end{align}
 
-\section{Nearest Neighbour Classification}
+\section{Nearest Neighbour Classification}\label{prob2}
 \section{Capacity \& Overfitting}
+\subsection{Capacity}
+We assume consistency of our training data: 
+\begin{equation}
+	(x^1,y^1),(x^2,y^2)\in \mathcal D: x^1=x^2 \Rightarrow y^1 =y^2.
+\end{equation}
+\begin{description}
+	\item[Decision trees] If we use binary splits $\llbracket x_k \geq \theta_k\rrbracket$, $k=1,\dots,d$ we partition $\mathbb R^2$ into rectangular areas around the training data. If the data is consistent, we can make this partition arbitrarily granular and hence the memory is $\infty$.
+	\item[1-NN] is always error free on the training data (cf. problem \ref{prob2}), thus we again have memory $\infty$.
+	\item[$K$-NN] has capacity 2, since there is always the possibility that one sample with label $y^1$ is surrounded by $n-1$ samples with label $y^2$.
+	\item[Perceptron] The decision $h(x) = \sign(\inprod{w}{x} -\theta)$ corresponds to a hyperplane decision boundary, where the hyperplane is determined by the weight vector $w$ and the offset $\theta$. Thus, to be error free on the training data, it has to be linearly separable, which is guaranteed for $n=2$ or less samples but not for 3 or more arbitrary samples (Imagine 3 samples that can be connected with a line:
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[fill=black] (0,0) circle [radius=2pt] node[below]{$y^1=-1$};
+			\draw[fill=black]  (2,0) circle [radius=2pt] node[below]{$y^2=1$};
+			\draw[fill=black]  (4,0) circle [radius=2pt] node[below]{$y^3=-1$};
+			\draw (-1,0)--(5,0);
+					\end{tikzpicture}
+	\end{center}
+	\item[Boosting] For this case, the memory depends on the simple component decision rules. In case of the binary coordinate splits that were used in the lecture slides, the situation is similar to the one of the decision tree. Therefore, the memory is $\infty$.
+\end{description}
+	
+	\subsection{Overfitting}
+	A high capacity obviously implies overfitting while a low one corresponds to unterfitting. 
+	\subsection{Free parameters of the preceptron}
+	In $\mathbb R^2$, there are $2$ weight vector elements and the offset $\theta$, thus in total $3$ parameters.
+	\subsection{Free parameters of a tree with $L$ leaves}
+	Each tree node checks $\llbracket x_k \geq \theta_k\rrbracket$, $k=1,\dots,d$ and hence contributes one parameter $\theta_i$. Consequently, the question reduces to finding the number $I$ of interior nodes of a full, binary tree with $L$ leaves. It can be shown that $I=L-1$ and therefore $L-1$ free parameters.
+	
 \section{Missing Proofs}
 \subsection{Bayes Classifier}
 The optimal classifier is given by
@@ -76,7 +104,29 @@ and hence
 							= \sign \left( \log  \frac{p(+1|x)}{p(-1|x)} + \log{\frac{c-d}{b-a}}\right). \hfill \blacksquare
 \end{equation}
 \section{Practical Experiments I}
-
+\subsection{Decision Trees}
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity (\# of interior nodes),
+    ylabel=Error,
+    title=normal run]
+	\addplot table[ header=false] {tree_continous/5a1_train.txt};%
+	\addplot table[header=false] {tree_continous/5a1_test.txt};%};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+  \begin{axis}[
+    xlabel=Complexity (\# of interior nodes),
+    ylabel=Error,
+    title=switched label of $y^9$]
+	\addplot table[ header=false] {tree_continous/5a2_train.txt};%
+	\addplot table[header=false] {tree_continous/5a2_test.txt};%};%
+    \addlegendentry{training}%
+    \addlegendentry{testing}%
+  \end{axis}
+\end{tikzpicture}
 \subsection{Perceptron}
 
 \begin{tikzpicture}
@@ -150,10 +200,9 @@ Using this method we achieve a test error of $E=8$ on the wine dataset.
 
 
 \subsection{Decision Tree}
-Instead of plotting the error over the complexity (number of nodes) for the data given in problem 5, we  chose the wine dataset to generate the plot. This is due to the fact, that if we use less trainings samples (corresponding to fewer nodes) the tree 
 \begin{tikzpicture}
   \begin{axis}[
-    xlabel=Complexity (\# of nodes),
+    xlabel=Complexity (\# of interior nodes),
     ylabel=Error]
 	\addplot table[ header=false] {tree_continous/6a_train.txt};%
 	\addplot table[header=false] {tree_continous/6a_test.txt};%};%
