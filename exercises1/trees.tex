@@ -113,7 +113,7 @@ Classification results are in Table~\ref{tab:tree-noeyes}.
 \begin{tikzpicture}
   \node {sex?}
   child { node {soccer?}
-    child { node {height}
+    child { node {height?}
     child { node {no} edge from parent node[left] {tall} }
     child { node {yes} edge from parent node[right] {short} }
       edge from parent node[left] {yes} }
@@ -200,7 +200,7 @@ Classification results are in Table~\ref{tab:tree-ralph}.
     child { node {no} edge from parent node[left] {yes} }
     child { node {yes} edge from parent node[right] {no} }
     edge from parent node[left] {blue} }
-  child { node {handsome}
+  child { node {handsome?}
     child { node {sex?}
       child { node {yes} edge from parent node[left] {male} }
       child { node {no} edge from parent node[right] {female} }
