@@ -74,99 +74,6 @@ class Perceptron:
 class WeakLearner:
 
 	column = None
-	value = None
-
-	def classify(self, X):
-		labels = 2*(X[:,self.column] == self.value) - 1
-		return labels
-
-class AdaBoost:
-
-	#T is number of iterations
-	def train(self, X, Y, T, X2,Y2):
-
-		n = X.shape[0]
-		m = X.shape[1]
-
-		#Create weak learners
-		H = []
-		for c in xrange(m):
-			for v in np.unique(X[:,c]):
-				h = WeakLearner()
-				h.column = c
-				h.value = v
-				H.append(h)
-
-		#Make sure we don't run out of weak classifiers
-		T = min(T,len(H))
-
-		#Initial weights	
-		w = np.ones(n) / n
-
-		#Ensemble
-		F = []
-
-		#ensemble weight
-		alpha_t = np.zeros(T)
-		
-		for t in xrange(T):
-
-			#Compute errors of weak classifiers
-			E_h = np.zeros(len(H))
-			for i in xrange(len(H)):
-				E_h[i] = np.sum(w*(H[i].classify(X) != Y))
-
-			#Find best weak classifier
-			#TODO: break ties?
-			h_best = np.argmin(E_h)
-			e_h = E_h[h_best]
-
-			#Classifier importance
-			alpha = np.log((1-e_h)/e_h)/ 2 
-
-			#Add to ensemble
-			ht = H[h_best]
-			F.append(ht)
-			alpha_t[t] = alpha
-
-			#Re-weigh training examples
-			labels = ht.classify(X)
-			correct = labels == Y
-			incorrect = labels != Y
-
-			w[incorrect] = w[incorrect] * (np.e**alpha) 
-			w[correct] = w[correct] * (np.e**-alpha) 
-
-			#Normalize
-			w = w / sum(w)
-
-		self.alpha_t = alpha_t
-		self.F = F
-
-		#Compute train_error
-		L = self.classify(X)
-		train_error = np.sum(L != Y)
-		print 'train error:', train_error
-		train_err.append(train_error)
-
-		#Compute test_error
-		L = self.classify(X2)
-		test_error = np.sum(L != Y2)
-		print 'test error:', test_error
-		test_err.append(test_error)
-
-		return np.array(train_err), np.array(test_err)
-
-	def classify(self, X):
-		augment = np.ones((X.shape[0],1))
-		X = np.hstack((X, augment)) #Augment input vector
-		label = np.sign(X.dot(self.w))
-		label[label == 0] = -1
-		return label
-
-class WeakLearner:
-
-	column = None
 	threshold = None
 	only_greater = False
 
@@ -250,13 +157,13 @@ class AdaBoost:
 			w = w / sum(w)
 
 			#Compute train_error
-			L = self.classify(X)
+			L,_ = self.classify(X)
 			train_error = np.sum(L != Y)
 			print 'train error:', train_error
 			train_err.append(train_error)
 
 			#Compute test_error
-			L = self.classify(X2)
+			L,_ = self.classify(X2)
 			test_error = np.sum(L != Y2)
 			print 'test error:', test_error
 			test_err.append(test_error)

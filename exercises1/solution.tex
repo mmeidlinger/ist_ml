@@ -29,7 +29,7 @@ level 3/.style={sibling distance=3em}%
 \input{trees}
 
 \subsection{Additional Attributes}
-There are $K=5$ attributes given, none of which a single split along any of those would achieve zero error probability. In order to achieve zero error probability with a single split along any of the $D$ additional attributes, at least one set of values of those must be isomorphic to the dating decision. Let $\vec d \in \lbrace 0,1\rbrace^n$ denote the dating decisions of the $n$ candidates and $\rvec a_i \sim \frac{1}{2^n}$, $i=1,\dots,D$  random vectors representing the additional attributes. We can then derive the probability of zero error with a single split (event $\mathcal A$) as follows:
+There are $K=5$ attributes given, none of which a single split along any of those would achieve zero error probability. In order to achieve zero error probability with a single split along any of the $D$ additional attributes, at least one set of values of those additional attributes must be isomorphic to the dating decision. Let $\vec d \in \lbrace 0,1\rbrace^n$ denote the dating decisions of the $n$ candidates and $\rvec a_i \sim \frac{1}{2^n}$, $i=1,\dots,D$  random vectors representing the additional attributes. We can then derive the probability of zero error with a single split (event $\mathcal A$) as follows:
 
 \begin{align}
 	\Prob{\mathcal A}& = 
@@ -40,7 +40,10 @@ There are $K=5$ attributes given, none of which a single split along any of thos
 	= \begin{cases} 0.0384 &D=10 \\  0.3293 &D=100 \\ 0.9950 &D=1353\end{cases}
 \end{align}
 
-\section{Nearest Neighbour Classification}\label{prob2}
+\section{Nearest Neighbour Classification}
+
+\mytodo{2a}
+
 \section{Capacity \& Overfitting}
 \subsection{Capacity}
 We assume consistency of our training data: 
@@ -104,66 +107,19 @@ and hence
 							= \sign \left( \log  \frac{p(+1|x)}{p(-1|x)} + \log{\frac{c-d}{b-a}}\right). \qedhere
 \end{equation}
 \section{Practical Experiments I}
-\subsection{Decision Trees}
-\begin{tikzpicture}
-  \begin{axis}[
-    xlabel=Complexity (\# of interior nodes),
-    ylabel=Error,
-    title=normal run]
-	\addplot table[ header=false] {tree_continous/5a1_train.txt};%
-	\addplot table[header=false] {tree_continous/5a1_test.txt};%};%
-    \addlegendentry{training}%
-    \addlegendentry{testing}%
-  \end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-  \begin{axis}[
-    xlabel=Complexity (\# of interior nodes),
-    ylabel=Error,
-    title=switched label of $y^9$]
-	\addplot table[ header=false] {tree_continous/5a2_train.txt};%
-	\addplot table[header=false] {tree_continous/5a2_test.txt};%};%
-    \addlegendentry{training}%
-    \addlegendentry{testing}%
-  \end{axis}
-\end{tikzpicture}
-
-
-
-\subsection{$k$-Nearest-Neighbor}
-\begin{tikzpicture}
-  \begin{axis}[
-    xlabel=Complexity ($k$),
-    ylabel=Error,
-    title=normal run]
-	\addplot table[ header=false] {knn/5b1_train.txt};%
-	\addplot table[header=false] {knn/5b1_test.txt};%};%
-    \addlegendentry{training}%
-    \addlegendentry{testing}%
-  \end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-  \begin{axis}[
-    xlabel=Complexity ($k$),
-    ylabel=Error,
-    title=switched label of $y^9$]
-	\addplot table[ header=false] {knn/5b2_train.txt};%
-	\addplot table[header=false] {knn/5b2_test.txt};%};%
-    \addlegendentry{training}%
-    \addlegendentry{testing}%
-  \end{axis}
-\end{tikzpicture}
-
 
 \subsection{Perceptron}
+
+In the second dataset, the training algorithm does not converge as the examples
+are no longer linearly separable.
 
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
     ylabel=Error,
   title=normal run]
-    \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-perc.txt};%
-    \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-perc.txt};%
+    \addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-trainerror-perc.txt};%
+    \addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-testerror-perc.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -175,8 +131,8 @@ and hence
     ylabel=Error,
 	mark repeat = 10,
   title=switched label of $y^9$]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-perc.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-perc.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-trainerror-perc.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-testerror-perc.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -185,13 +141,15 @@ and hence
 
 \subsection{AdaBoost}
 
+\mytodo{This is weird.}
+
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
     ylabel=Error,
   title=normal run]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-boost.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-trainerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-testerror-boost.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -202,8 +160,8 @@ and hence
     xlabel=Complexity,
     ylabel=Error,
   title=switched label of $y^9$]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-boost.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-trainerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-testerror-boost.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -230,7 +188,7 @@ Using this method we achieve a test error of $E=8$ on the wine dataset.
 \subsection{Decision Tree}
 \begin{tikzpicture}
   \begin{axis}[
-    xlabel=Complexity (\# of interior nodes),
+    xlabel=Complexity (\# of nodes),
     ylabel=Error]
 	\addplot table[ header=false] {tree_continous/6a_train.txt};%
 	\addplot table[header=false] {tree_continous/6a_test.txt};%};%
@@ -238,22 +196,6 @@ Using this method we achieve a test error of $E=8$ on the wine dataset.
     \addlegendentry{testing}%
   \end{axis}
 \end{tikzpicture}
-
-\subsection{$k$-Nearest-Neighbor}
-Here we have the problem that the different properties have a very different scaling. For large $k$, underfitting causes high error rates.
-
-\begin{tikzpicture}
-  \begin{axis}[
-    xlabel=Complexity ($k$),
-    ylabel=Error,
-    legend pos=north west]
-	\addplot table[ header=false] {knn/6b_train.txt};%
-	\addplot table[header=false] {knn/6b_test.txt};%};%
-    \addlegendentry{training}%
-    \addlegendentry{testing}%
-  \end{axis}
-\end{tikzpicture}
-
 \clearpage
 
 \section{Appendix}
