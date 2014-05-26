@@ -110,13 +110,16 @@ and hence
 
 \subsection{Perceptron}
 
+In the second dataset, the training algorithm does not converge as the examples
+are no longer linearly separable.
+
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=Complexity,
     ylabel=Error,
   title=normal run]
-    \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-perc.txt};%
-    \addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-perc.txt};%
+    \addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-trainerror-perc.txt};%
+    \addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-testerror-perc.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -128,8 +131,8 @@ and hence
     ylabel=Error,
 	mark repeat = 10,
   title=switched label of $y^9$]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-perc.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-perc.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-trainerror-perc.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-testerror-perc.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -145,8 +148,8 @@ and hence
     xlabel=Complexity,
     ylabel=Error,
   title=normal run]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-trainerror-boost.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial1-testerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-trainerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial1-testerror-boost.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
@@ -157,8 +160,8 @@ and hence
     xlabel=Complexity,
     ylabel=Error,
   title=switched label of $y^9$]
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-trainerror-boost.txt};%
-	\addplot table[x expr=\coordindex,y index=0, header=false] {artificial2-testerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-trainerror-boost.txt};%
+	\addplot table[x expr=\coordindex+1,y index=0, header=false] {artificial2-testerror-boost.txt};%
     \addlegendentry{training}%
     \addlegendentry{testing}%
   \end{axis}
